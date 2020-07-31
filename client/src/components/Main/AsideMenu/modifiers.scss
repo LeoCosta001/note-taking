@@ -1,0 +1,8 @@
+.notelist--item--selected {
+  background-color: rgba(52, 152, 219, 0.2);
+  border-left-color: $BG_Blue !important;
+
+  &:hover {
+    background-color: rgba(52, 152, 219, 0.2) !important;
+  }
+}

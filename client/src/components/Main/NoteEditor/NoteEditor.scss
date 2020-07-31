@@ -1,0 +1,75 @@
+.noteeditor__component__container {
+  min-height: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.noteeditor__container {
+  background-color: $BG_White;
+  width: calc(100% - 80px);
+  height: calc(100% - 80px);
+  border: $Border_Default;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+
+  & .noteeditor__input__container {
+    border-bottom: $Border_Default;
+    min-height: 50px;
+    max-height: 50px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    overflow: auto;
+
+    & .noteeditor__input__title {
+      font-weight: bold;
+    }
+
+    & .noteeditor__input__text {
+      border: $Border_Default;
+      border-radius: 4px;
+      padding: 5px;
+      margin-left: 10px;
+      width: 100%;
+    }
+
+    & .noteeditor__input__tags {
+      margin-left: 5px;
+      display: flex;
+      width: 100%;
+
+      & button {
+        color: $LT_Dark;
+        font-size: 0.9em;
+        height: 30px;
+        width: 85px;
+        border: $Border_Default;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & ~ button {
+          margin-left: 15px;
+        }
+
+        &:hover {
+          background-color: $BG_lightBlue;
+        }
+      }
+    }
+  }
+
+  & .noteeditor__app__container {
+    height: calc(100vh - 277px);
+    & .noteeditor__app {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+
+    }
+  }
+}

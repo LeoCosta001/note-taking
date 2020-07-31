@@ -1,0 +1,49 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  color: $LT_Dark;
+}
+
+#app {
+  background-color: $BG_lightGrey;
+  font-family: 'Open Sans';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  & hr {
+    opacity: 0.5;
+    border-bottom: $Border_Default;
+    width: 100%;
+  }
+
+  & input {
+    &::placeholder {
+      color: $LT_Light;
+    }
+  }
+}
+
+/**************************
+* Framework "vue2-editor" *
+***************************/
+.ql-toolbar {
+  border: none !important;
+  border-bottom: $Border_Default !important;
+}
+
+.ql-container {
+  height: calc(100% - 48px);
+  min-height: inherit;
+  overflow: auto;
+  border: none !important;
+
+  & .ql-editor {
+    min-height: 100%;
+  }
+}

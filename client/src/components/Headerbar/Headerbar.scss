@@ -1,0 +1,27 @@
+.Headerbar {
+  background-color: $BG_White;
+  width: 100%;
+  height: 55px;
+  border-bottom: $Border_Default;
+  display: flex;
+  align-items: center;
+
+  & .logo__container {
+    user-select: none;
+    cursor: pointer;
+    height: 20px;
+    margin-left: 25px;
+    border: solid 1px $BG_Blue;
+    display: flex;
+    align-items: center;
+    box-shadow: 5px 3px 0px $BG_Blue;
+
+    & .logo__text {
+      color: $BG_Blue;
+      padding: 0px 2px;
+      display: flex;
+      align-items: center;
+      font-size: 12pt;
+    }
+  }
+}

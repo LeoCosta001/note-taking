@@ -1,0 +1,186 @@
+.asidemenu__component__container {
+  background-color: $BG_White;
+  width: 300px;
+  min-height: calc(100vh - 56px);
+  border-right: $Border_Default;
+}
+
+// Pesquisa
+.notesearch__input__container {
+  background-color: $BG_DarkWhite;
+  height: 50px;
+  border-bottom: $Border_Default;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & .notesearch__input {
+    background-color: $BG_White;
+    border: $Border_Default;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 25px;
+    width: 80%;
+    padding-right: 3px;
+
+    & input {
+      color: $LT_LightDark;
+      background-color: transparent;
+      margin-left: 3px;
+      flex: 1;
+    }
+
+    & .notesearch__input__icon {
+      height: 17px;
+      width: 17px;
+      margin-left: 5px;
+
+      & .svg-search-icon {
+        height: 17px;
+        width: 17px;
+
+        & path {
+          fill: #747474;
+        }
+      }
+    }
+  }
+}
+
+// Opções
+.noteoptions__container {
+  height: 30px;
+  border-bottom: $Border_Default;
+  display: flex;
+
+  & > button {
+    background-color: $BG_White;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & ~ button {
+      border-left: $Border_Default;
+    }
+  }
+
+  & .noteoptios__newnote {
+    & .svg-newnote-icon {
+      width: 20px;
+      height: 20px;
+
+      & path {
+        fill: $BG_Blue;
+      }
+    }
+
+    &:hover {
+      background-color: $BG_lightBlue;
+
+      & .svg-newnote-icon {
+        & path {
+          fill: $BG_White;
+        }
+      }
+    }
+  }
+
+  & .noteoptios__savenote {
+    & .svg-savenote-icon {
+      width: 24px;
+      height: 24px;
+
+      & path {
+        fill: $BG_Blue;
+      }
+    }
+
+    &:hover {
+      background-color: $BG_lightBlue;
+
+      & .svg-savenote-icon {
+        & path {
+          fill: $BG_White;
+        }
+      }
+    }
+  }
+
+  & .noteoptios__deletenote {
+    & .svg-deletenote-icon {
+      width: 20px;
+      height: 20px;
+
+      & path {
+        fill: $BG_Blue;
+      }
+    }
+
+    &:hover {
+      background-color: $BG_lightBlue;
+
+      & .svg-deletenote-icon {
+        & path {
+          fill: $BG_White;
+        }
+      }
+    }
+  }
+}
+
+// Lista de Anotações
+.notelist__container {
+  width: 100%;
+
+  & .notelist__item__container {
+    user-select: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    height: 80px;
+    border-left: solid 4px $BG_Grey;
+    border-bottom: $Border_Default;
+    padding: 7.5px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    & .notelist__item__title {
+      font-weight: bold;
+    }
+
+    & .notelist__item__content {
+      overflow: hidden;
+      opacity: 0.8;
+      font-style: italic;
+      font-size: 0.8em;
+      line-height: 1.2em;
+      height: 2.4em;
+      margin-left: 10px;
+    }
+
+    & .notelist__item__category {
+      color: $flatLightPurple;
+      font-size: 0.9em;
+      display: flex;
+      align-items: center;
+
+      & div {
+        background-color: $flatLightPurple;
+        height: 7.5px;
+        width: 7.5px;
+        border-radius: 50%;
+        margin-right: 5px;
+      }
+    }
+
+    &:hover {
+      background-color: rgba(52, 152, 219, 0.1);
+    }
+  }
+}
