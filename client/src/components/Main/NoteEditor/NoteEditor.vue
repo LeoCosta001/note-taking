@@ -11,7 +11,7 @@
           placeholder="Escreva um título..."
           spellcheck="false"
           class="noteeditor__input__text"
-          v-model="appEdit.noteTitle"
+          v-model="appEdit.title"
         />
       </div>
       <div class="noteeditor__input__container">
@@ -21,29 +21,29 @@
         <div class="noteeditor__input__tags">
           <button
             class="noteeditor__input__tags"
-            :class="{ 'noteeditor--tag--selected': appEdit.noteTag === 'Lembrete' }"
-            v-on:click="appEdit.noteTag = 'Lembrete'"
+            :class="{ 'noteeditor--tag--selected': appEdit.tag === 'Lembrete' }"
+            v-on:click="appEdit.tag = 'Lembrete'"
           >
             Lembrete
           </button>
           <button
             class="noteeditor__input__tags"
-            :class="{ 'noteeditor--tag--selected': appEdit.noteTag === 'Importante' }"
-            v-on:click="appEdit.noteTag = 'Importante'"
+            :class="{ 'noteeditor--tag--selected': appEdit.tag === 'Importante' }"
+            v-on:click="appEdit.tag = 'Importante'"
           >
             Importante
           </button>
           <button
             class="noteeditor__input__tags"
-            :class="{ 'noteeditor--tag--selected': appEdit.noteTag === 'Trabalho' }"
-            v-on:click="appEdit.noteTag = 'Trabalho'"
+            :class="{ 'noteeditor--tag--selected': appEdit.tag === 'Trabalho' }"
+            v-on:click="appEdit.tag = 'Trabalho'"
           >
             Trabalho
           </button>
           <button
             class="noteeditor__input__tags"
-            :class="{ 'noteeditor--tag--selected': appEdit.noteTag === 'Outros' }"
-            v-on:click="appEdit.noteTag = 'Outros'"
+            :class="{ 'noteeditor--tag--selected': appEdit.tag === 'Outros' }"
+            v-on:click="appEdit.tag = 'Outros'"
           >
             Outros
           </button>
@@ -55,7 +55,7 @@
         <vue-editor
           class="noteeditor__app"
           placeholder="Escreva aqui as suas anotações..."
-          v-model="appEdit.noteText"
+          v-model="appEdit.text"
           :editorToolbar="vueEditorConfig.customToolbar"
         ></vue-editor>
       </div>

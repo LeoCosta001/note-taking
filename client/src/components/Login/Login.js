@@ -9,6 +9,10 @@ export default {
     };
   },
   methods: {
+    /** Método para enviar os dados do formulário de login.
+     * @summary "Caso a conta seja válida será retornado um token de autenticação".
+     * @method login
+     */
     login() {
       http
         .post('auth/authenticate', {

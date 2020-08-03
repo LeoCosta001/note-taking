@@ -1,6 +1,6 @@
 <template>
   <div class="login__component__container">
-    <div class="login__container">
+    <form class="login__container" @submit.prevent="login">
       <div class="login__title">Entre na sua conta</div>
       <div class="login__input__container">
         <input
@@ -20,14 +20,14 @@
           v-model="password"
         />
       </div>
-      <button @click="login()" class="login__button">Entrar</button>
+      <button type="submit" class="login__button">Entrar</button>
       <div class="login__hr__container">
         <hr />
         <span>ou</span>
         <hr />
       </div>
       <a class="login__link">Criar uma conta</a>
-    </div>
+    </form>
   </div>
 </template>
 

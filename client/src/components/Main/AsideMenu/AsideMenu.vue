@@ -14,13 +14,13 @@
             ></path>
           </svg>
         </div>
-        <input type="search" placeholder="Pesquisar" spellcheck="false" />
+        <input type="search" placeholder="Pesquisar" spellcheck="false" v-model="searchQuery" />
       </div>
     </section>
 
     <!-- Opções -->
     <section class="noteoptions__container">
-      <button class="noteoptios__newnote">
+      <button class="noteoptios__newnote" @click="noteTakingCreate()">
         <svg class="svg-newnote-icon" viewBox="0 0 20 20">
           <path
             fill="none"
@@ -31,7 +31,7 @@
           ></path>
         </svg>
       </button>
-      <button class="noteoptios__savenote">
+      <button class="noteoptios__savenote" @click="noteTakingSave()">
         <svg class="svg-savenote-icon" viewBox="0 0 20 20">
           <path
             d="M17.064,4.656l-2.05-2.035C14.936,2.544,14.831,2.5,14.721,2.5H3.854c-0.229,0-0.417,0.188-0.417,0.417v14.167c0,0.229,0.188,
@@ -42,7 +42,7 @@
           ></path>
         </svg>
       </button>
-      <button class="noteoptios__deletenote">
+      <button class="noteoptios__deletenote" @click="noteTakingDelete()">
         <svg class="svg-deletenote-icon" viewBox="0 0 20 20">
           <path
             fill="none"
@@ -61,7 +61,7 @@
     <section class="notelist__container">
       <div
         class="notelist__item__container"
-        v-for="(data, index) in noteList"
+        v-for="(data, index) in noteListQuery"
         :key="index"
         :class="{ 'notelist--item--selected': noteSelected === index }"
         v-on:click="emitNoteTaking(index)"

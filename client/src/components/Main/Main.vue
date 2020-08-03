@@ -1,7 +1,16 @@
 <template>
   <div class="main__component__container">
-    <AsideMenu @noteTakingSelected="reqNoteTakingSelected" />
-    <NoteEditor ref="component_NoteEditor" />
+    <AsideMenu
+      @noteTakingSelected="reqNoteTakingSelected"
+      @noteTakingSave="noteTakingSave"
+      @noteTakingDelete="noteTakingDelete"
+      ref="component_AsideMenu"
+    />
+    <NoteEditor
+      ref="component_NoteEditor"
+      @returnNoteTakingSave="reqNoteTakingSave"
+      @returnNoteTakingDelete="reqNoteTakingDelete"
+    />
   </div>
 </template>
 
