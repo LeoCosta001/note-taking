@@ -1,3 +1,4 @@
+import http from '@/services/axiosConfig';
 import AsideMenu from './AsideMenu/AsideMenu.vue';
 import NoteEditor from './NoteEditor/NoteEditor.vue';
 
@@ -42,5 +43,23 @@ export default {
     reqNoteTakingDelete(data) {
       this.$refs.component_AsideMenu.attNoteList(data, 'delete');
     }
+  },
+
+  mounted() {
+    // Usando o token para buscar todas as anotações do usuário
+    http
+      .get('note-taking', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('US_XXX')}`
+        }
+      })
+      .then(res => {
+        this.$refs.component_AsideMenu.attNoteList(res.data.noteTakingList);
+        this.$refs.component_AsideMenu.emitNoteTaking(0);
+        this.$emit('userInfo', res.data.userInfo);
+      })
+      .catch(err => {
+        alert(err.response.data.error);
+      });
   }
 };

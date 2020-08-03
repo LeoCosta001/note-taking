@@ -10,14 +10,17 @@ router.use(authMiddleware);
 /** Listar as anotações do usuário autenticado.
  * @summary "Antes de enviar a lista de anotações é iniciado o método de controle 'noteAdd()'.
  * @access "Apenas com token válido".
- * @returns {Sucess} "Lista com todas as anotações daquele usuário".
+ * @returns {Sucess} "Lista com todas as anotações daquele usuário junto com o nome de usuário e email".
  * @returns {Fail} "Mensagem de erro".
  */
 router.get('/', async (req, res) => {
   try {
-    const noteTakingList = await noteTakingController.noteList(req, res);
+    const list = await noteTakingController.noteList(req, res);
 
-    return res.send({ noteTakingList });
+    return res.send({
+      noteTakingList: list.allNoteTaking,
+      userInfo: list.userInfo,
+    });
   } catch (err) {
     return res.status(400).send({ error: 'Falha ao listar anotações.' });
   }

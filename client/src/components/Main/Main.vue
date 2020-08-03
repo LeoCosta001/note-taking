@@ -1,10 +1,10 @@
 <template>
   <div class="main__component__container">
     <AsideMenu
+      ref="component_AsideMenu"
       @noteTakingSelected="reqNoteTakingSelected"
       @noteTakingSave="noteTakingSave"
       @noteTakingDelete="noteTakingDelete"
-      ref="component_AsideMenu"
     />
     <NoteEditor
       ref="component_NoteEditor"

@@ -4,19 +4,38 @@ const NoteTaking = require('../models/note-taking-schema');
  * @summary "Antes de enviar a lista de anotações é procurado no banco de dados apenas as anotações
  * correspondentes ao usuário autenticado que fez a requisição.
  * @access "Apenas com token válido".
- * @returns {Sucess} "Lista com todas as anotações daquele usuário".
+ * @returns {Sucess} "Lista com todas as anotações daquele usuário junto com o nome de usuário e email".
  * @returns {Fail} "Mensagem de erro".
  */
 exports.noteList = async (req, res) => {
   try {
-    const noteTakingList = await NoteTaking.find(
+    let allNoteTaking = await NoteTaking.find(
       {
         assignedTo: req.userId,
       },
       '-__v'
-    );
+    ).populate('assignedTo');
 
-    return noteTakingList;
+    const userInfo = {
+      user: allNoteTaking[0].assignedTo.user,
+      email: allNoteTaking[0].assignedTo.email,
+    };
+
+    allNoteTaking = allNoteTaking.map((value) => {
+      return {
+        _id: value._id,
+        title: value.title,
+        tag: value.tag,
+        favorite: value.favorite,
+        text: value.text,
+        lastUpdate: value.lastUpdate,
+      };
+    });
+
+    return {
+      allNoteTaking: allNoteTaking,
+      userInfo: userInfo,
+    };
   } catch (err) {
     res.status(400).send({ error: 'Falha ao listar anotações.' });
   }

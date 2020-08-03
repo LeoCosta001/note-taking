@@ -91,23 +91,9 @@ export default {
           return value;
         });
       }
+
+      if (!eventName) newNoteList = data;
       this.noteList = newNoteList;
     }
-  },
-  mounted() {
-    // Usando o token para buscar todas as anotações do usuário
-    http
-      .get('note-taking', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('US_XXX')}`
-        }
-      })
-      .then(res => {
-        this.noteList = res.data.noteTakingList;
-        this.emitNoteTaking(0);
-      })
-      .catch(err => {
-        alert(err.response.data.error);
-      });
   }
 };

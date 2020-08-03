@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Headerbar />
-    <router-view />
+    <Headerbar ref="component_Headerbar" />
+    <router-view @userInfo="userInfo" />
   </div>
 </template>
 
@@ -11,6 +11,16 @@ import Headerbar from '@/components/Headerbar/Headerbar.vue';
 export default {
   components: {
     Headerbar
+  },
+  methods: {
+    /** Atualizar as informações do usuário exibidas no Headerbar.
+     * @summary "Altera as informações do usuário que serão exebidas no Headerbar".
+     * @method userInfo
+     * @param {*Object} data "Objeto contendo as informações que serão exibidas".
+     */
+    userInfo(data) {
+      this.$refs.component_Headerbar.attUserInfo(data);
+    }
   }
 };
 </script>

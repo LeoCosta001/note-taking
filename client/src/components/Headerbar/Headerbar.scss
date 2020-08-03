@@ -5,6 +5,7 @@
   border-bottom: $Border_Default;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   & .logo__container {
     user-select: none;
@@ -22,6 +23,94 @@
       display: flex;
       align-items: center;
       font-size: 12pt;
+    }
+  }
+
+  & .user__container {
+    height: 55px;
+    margin-right: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    & .user__icon__container {
+      background-color: $BG_Blue;
+      border: solid 1px $BG_lightBlue;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & .svg-user-icon {
+        width: 80%;
+        height: 80%;
+
+        & path {
+          fill: $BG_White;
+        }
+      }
+
+      &:hover {
+        & .user__options__container {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    }
+
+    & .user__name {
+      user-select: none;
+      font-size: 0.8em;
+      white-space: nowrap;
+      margin: 5px 0px 0px 0px;
+    }
+  }
+
+  & .user__options__container {
+    cursor: default;
+    display: none;
+    background-color: $BG_White;
+    min-width: 150px;
+    padding: 10px;
+    border: $Border_Default;
+    box-shadow: 0px 0px 4px $BG_Grey50;
+    position: absolute;
+    bottom: -80px;
+    right: 0px;
+
+    & hr {
+      margin: 10px 0px;
+    }
+
+    & .user__info__container {
+      display: flex;
+      flex-direction: column;
+      color: $LT_Dark;
+
+      & .user__info__name {
+        font-weight: bold;
+      }
+
+      & .user__info__email {
+        color: $LT_Light;
+        font-weight: 300;
+        font-size: 0.8em;
+        margin-top: 5px;
+      }
+    }
+
+    & .user__button {
+      border-radius: 2px;
+      border: $Border_Default;
+      height: 30px;
+
+      &:hover {
+        background-color: $BG_lightBlue;
+      }
     }
   }
 }
