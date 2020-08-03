@@ -1,3 +1,5 @@
+import http from '@/services/axiosConfig';
+
 export default {
   name: 'AsideMenu',
   data() {
@@ -15,32 +17,19 @@ export default {
     }
   },
   mounted() {
-    // Definir a lista de anotações assim que a página é carregada
-    const reqNoteList = [
-      {
-        id: 'ab',
-        noteTitle: 'Anotações de teste',
-        noteTag: 'Lembrete',
-        noteFavorite: false,
-        noteText: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit eligendi iure...Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit eligendi iure...'
-      },
-      {
-        id: 'cd',
-        noteTitle: 'Datas de aniversários',
-        noteTag: 'Lembrete',
-        noteFavorite: false,
-        noteText: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit eligendi iure...'
-      },
-      {
-        id: 'ef',
-        noteTitle: 'Lista de compras',
-        noteTag: 'Importante',
-        noteFavorite: false,
-        noteText: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit eligendi iure...'
-      }
-    ];
-
-    this.noteList = reqNoteList;
-    this.emitNoteTaking(0);
+    // Usando o token para buscar todas as anotações do usuário
+    http
+      .get('note-taking', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('US_XXX')}`
+        }
+      })
+      .then(res => {
+        this.noteList = res.data.noteTakingList;
+        this.emitNoteTaking(0);
+      })
+      .catch(err => {
+        console.log(err.response.data);
+      });
   }
 };

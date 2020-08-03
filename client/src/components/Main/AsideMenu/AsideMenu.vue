@@ -66,11 +66,11 @@
         :class="{ 'notelist--item--selected': noteSelected === index }"
         v-on:click="emitNoteTaking(index)"
       >
-        <div class="notelist__item__title">{{ data.noteTitle }}</div>
-        <div class="notelist__item__content">{{ data.noteText }}</div>
+        <div class="notelist__item__title">{{ data.title }}</div>
+        <div class="notelist__item__content">{{ data.text }}</div>
         <div class="notelist__item__category">
           <div></div>
-          {{ data.noteTag }}
+          {{ data.tag }}
         </div>
       </div>
     </section>

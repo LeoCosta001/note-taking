@@ -1,0 +1,87 @@
+.login__component__container {
+  width: 100%;
+  min-height: calc(100vh - 56px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login__container {
+  background-color: $BG_White;
+  width: 300px;
+  border: $Border_Default;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+
+  & .login__title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+  }
+
+  // Formulário de login
+  .login__input__container {
+    display: flex;
+    flex-direction: column;
+
+    & ~ .login__input__container {
+      margin-top: 15px;
+    }
+
+    & .login__input__box {
+      color: $LT_Dark;
+      font-size: 0.9em;
+      letter-spacing: 0.4px;
+      border: $Border_Default;
+      border-radius: 2px;
+      padding: 10px;
+    }
+  }
+
+  & .login__button {
+    background-color: $LT_Green;
+    border-radius: 2px;
+    margin-top: 15px;
+    padding: 10px;
+    font-size: 1.1em;
+    color: $BG_White;
+
+    &:hover {
+      background-color: $LT_DarkGreen;
+
+      &:active {
+        background-color: $LT_Green;
+      }
+    }
+  }
+
+  // Outras opções
+  & .login__hr__container {
+    margin: 30px 0px;
+    display: flex;
+    align-items: center;
+
+    & span {
+      user-select: none;
+      color: $LT_Light;
+      margin: 0px 10px;
+    }
+
+    & hr {
+      border-color: $BD_Light;
+    }
+  }
+
+  & .login__link {
+    cursor: pointer;
+    text-decoration: underline;
+    margin: 0px auto;
+
+    &:hover {
+      color: $LT_DarkBlue;
+    }
+  }
+}

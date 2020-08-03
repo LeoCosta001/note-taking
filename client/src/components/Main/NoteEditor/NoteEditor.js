@@ -28,17 +28,14 @@ export default {
     };
   },
   methods: {
-    test() {
-      console.log(this.appEdit.noteText);
-    },
     attNoteEditor(data) {
       this.noteSelected = data;
       this.appEdit = {
-        id: data.id,
-        noteTitle: data.noteTitle,
-        noteTag: data.noteTag,
-        noteFavorite: data.noteFavorite,
-        noteText: data.noteText
+        id: data._id,
+        noteTitle: data.title,
+        noteTag: data.tag,
+        noteFavorite: data.favorite,
+        noteText: data.text
       };
     }
   }

@@ -23,6 +23,19 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Listar todas as anotações (rota temporária) //
+const NoteTaking = require('../models/note-taking-schema');
+router.get('/all', async (req, res) => {
+  try {
+    const noteTaking = await NoteTaking.find().populate('assignedTo');
+
+    return res.send({ noteTaking });
+  } catch (err) {
+    return res.status(400).send({ error: 'Falha ao listar anotações.' });
+  }
+});
+// ------------------------------------------- //
+
 /** Adicionar uma nova anotação.
  * @summary "Antes de atualizar a anotação é verificado se os valores são válidos e em seguida
  * é iniciado o método de controle 'noteAdd()'.
