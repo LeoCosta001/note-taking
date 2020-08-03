@@ -1,21 +1,28 @@
 import http from '@/services/axiosConfig';
 
 export default {
-  name: 'Login',
+  name: 'NewAccount',
   data() {
     return {
+      userName: '',
       email: '',
-      password: ''
+      password: '',
+      passwordConfirm: ''
     };
   },
   methods: {
-    /** Método para enviar os dados do formulário de login.
+    /** Método para enviar os dados do formulário de criação de conta.
      * @summary "Caso a conta seja válida será retornado um token de autenticação".
-     * @method login
+     * @method newAccount
      */
-    login() {
-      http
-        .post('auth/authenticate', {
+    newAccount() {
+      if (this.password !== this.passwordConfirm) {
+        return alert('A senha está diferente da senha de confirmação.');
+      }
+
+      return http
+        .post('auth/register', {
+          userName: this.userName,
           email: this.email,
           password: this.password
         })

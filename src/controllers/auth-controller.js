@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const NoteTaking = require('../models/note-taking-schema');
 const User = require('../models/user-schema');
 
 /** Resgistrar um novo usuário.
@@ -21,6 +22,16 @@ exports.userAdd = async (req, res) => {
     });
 
     user.password = undefined;
+
+    // Criar a primeira anotação
+    await NoteTaking.create({
+      title: 'Nova anotação',
+      tag: 'Lembrete',
+      favorite: false,
+      text: 'Texto de exemplo',
+      assignedTo: user._id,
+      lastUpdate: currentDate(),
+    });
 
     return user;
   } catch (err) {
@@ -53,3 +64,18 @@ exports.userAuth = async (req, res) => {
     res.status(400).send({ error: 'Falha ao resgistrar.' });
   }
 };
+
+/** Pegar a Data e Hora atual do servidor no formato "DD/MM/AAAA HH:MM:SS".
+ * @function currentDate
+ * @returns {String} "String de Data e Hora no formato "DD/MM/AAAA HH:MM:SS".
+ */
+function currentDate() {
+  const data = new Date();
+  const day = data.getDate();
+  const month = data.getMonth();
+  const year = data.getFullYear();
+  const hours = data.getHours();
+  const min = data.getMinutes();
+  const seg = data.getSeconds();
+  return `${day}/${month + 1}/${year} ${hours}:${min}:${seg}`;
+}

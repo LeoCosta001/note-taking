@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Auth from './auth';
 import Login from '../views/Login.vue';
+import NewAccount from '../views/NewAccount.vue';
 import Main from '../views/Main.vue';
 
 Vue.use(VueRouter);
@@ -24,6 +25,17 @@ const routes = [
     },
     beforeEnter(to, from, next) {
       Auth.loginPage(to, from, next);
+    }
+  },
+  {
+    path: '/new-account',
+    name: 'NewAccount',
+    component: NewAccount,
+    meta: {
+      title: 'Nova Conta'
+    },
+    beforeEnter(to, from, next) {
+      Auth.newAccountPage(to, from, next);
     }
   }
 ];

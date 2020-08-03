@@ -1,4 +1,4 @@
-.login__component__container {
+.newacc__component__container {
   width: 100%;
   min-height: calc(100vh - 56px);
   display: flex;
@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.login__container {
+.newacc__container {
   background-color: $BG_White;
   width: 300px;
   border: $Border_Default;
@@ -14,7 +14,7 @@
   display: flex;
   flex-direction: column;
 
-  & .login__title {
+  & .newacc__title {
     font-size: 1.5em;
     font-weight: bold;
     margin-bottom: 40px;
@@ -22,16 +22,16 @@
     justify-content: center;
   }
 
-  // Formulário de login
-  .login__input__container {
+  // Formulário de nova conta
+  .newacc__input__container {
     display: flex;
     flex-direction: column;
 
-    & ~ .login__input__container {
+    & ~ .newacc__input__container {
       margin-top: 15px;
     }
 
-    & .login__input__box {
+    & .newacc__input__box {
       color: $LT_Dark;
       font-size: 0.9em;
       letter-spacing: 0.4px;
@@ -41,7 +41,7 @@
     }
   }
 
-  & .login__button {
+  & .newacc__button {
     background-color: $LT_Green;
     border-radius: 2px;
     margin-top: 15px;
@@ -59,7 +59,7 @@
   }
 
   // Outras opções
-  & .login__hr__container {
+  & .newacc__hr__container {
     margin: 30px 0px;
     display: flex;
     align-items: center;
@@ -75,7 +75,7 @@
     }
   }
 
-  & .login__link {
+  & .newacc__link {
     cursor: pointer;
     text-decoration: underline;
     margin: 0px auto;

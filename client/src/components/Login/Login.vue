@@ -6,6 +6,7 @@
         <input
           type="text"
           placeholder="Email"
+          name="userEmail"
           spellcheck="false"
           class="login__input__box"
           v-model="email"
@@ -15,6 +16,7 @@
         <input
           type="password"
           placeholder="Senha"
+          name="userPassword"
           spellcheck="false"
           class="login__input__box"
           v-model="password"
@@ -26,7 +28,7 @@
         <span>ou</span>
         <hr />
       </div>
-      <a class="login__link">Criar uma conta</a>
+      <router-link to="/new-account" class="login__link">Não tenho uma conta</router-link>
     </form>
   </div>
 </template>
