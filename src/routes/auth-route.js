@@ -7,16 +7,6 @@ const authController = require('../controllers/auth-controller');
 
 const User = require('../models/user-schema');
 
-// Listar usuários (Rota temporária)
-router.get('/list', async (req, res) => {
-  try {
-    const userList = await User.find();
-    return res.send({ userList });
-  } catch (err) {
-    res.status(400).send({ error: 'Falha ao listar usuários.' });
-  }
-});
-
 /** Resgistrar um novo usuário.
  * @summary "Sempre que um formulário de Nova Conta for recebido será iniciado o método de
  * controle 'userAdd()', e por fim o 'JWT' irá gerar um novo token para o usuário".

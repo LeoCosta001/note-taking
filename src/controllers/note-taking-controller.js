@@ -48,6 +48,9 @@ exports.noteAdd = async (req, res) => {
   const { title, tag, favorite, text } = req.body;
 
   try {
+    const userSearch = await User.findOne({ _id: req.userId });
+    if (!userSearch) return 'user not found';
+
     const noteTakingCreate = await NoteTaking.create({
       title: title,
       tag: tag,
