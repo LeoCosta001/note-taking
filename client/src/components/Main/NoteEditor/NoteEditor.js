@@ -108,7 +108,7 @@ export default {
      * @returns {Fail} "Exibe um mensagem de Erro".
      */
     saveNote() {
-      if (!appEdit.id) return alert('Selecione uma anotação antes de salvar.');
+      if (!this.appEdit.id) return alert('Selecione uma anotação antes de salvar.');
 
       this.noteStatus.name = 'saving';
       http
@@ -134,6 +134,8 @@ export default {
           this.noteStatus.name = 'error';
           alert(err.response.data.error);
         });
+
+      return undefined;
     },
 
     /** Deletar anotação.
@@ -144,7 +146,7 @@ export default {
      * @returns {Fail} "Exibe um mensagem de Erro".
      */
     deleteNote() {
-      if (!appEdit.id) return alert('Selecione uma anotação antes de deletar.');
+      if (!this.appEdit.id) return alert('Selecione uma anotação antes de deletar.');
 
       http
         .delete(`note-taking/${this.appEdit.id}`, {
@@ -158,6 +160,8 @@ export default {
         .catch(err => {
           alert(err.response.data.error);
         });
+
+      return undefined;
     }
   }
 };
