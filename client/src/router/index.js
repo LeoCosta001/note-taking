@@ -4,6 +4,7 @@ import Auth from './auth';
 import Login from '../views/Login.vue';
 import NewAccount from '../views/NewAccount.vue';
 import Main from '../views/Main.vue';
+import PageNotFound from '../views/PageNotFound.vue';
 
 Vue.use(VueRouter);
 
@@ -40,6 +41,14 @@ const routes = [
     },
     beforeEnter(to, from, next) {
       Auth.newAccountPage(to, from, next);
+    }
+  },
+  {
+    path: '*',
+    name: 'PageNotFound',
+    component: PageNotFound,
+    meta: {
+      title: 'Página não encontrada'
     }
   }
 ];
