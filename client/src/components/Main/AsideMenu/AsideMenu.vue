@@ -58,7 +58,7 @@
     </section>
 
     <!-- Lista de Anotações -->
-    <section class="notelist__container">
+    <section class="notelist__container" v-if="noteListQuery">
       <div
         class="notelist__item__container"
         v-for="(data, index) in noteListQuery"

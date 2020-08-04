@@ -1,4 +1,5 @@
 const NoteTaking = require('../models/note-taking-schema');
+const User = require('../models/user-schema');
 
 /** Listar as anotações do usuário autenticado.
  * @summary "Antes de enviar a lista de anotações é procurado no banco de dados apenas as anotações
@@ -9,28 +10,22 @@ const NoteTaking = require('../models/note-taking-schema');
  */
 exports.noteList = async (req, res) => {
   try {
-    let allNoteTaking = await NoteTaking.find(
+    const userSearch = await User.findOne({ _id: req.userId });
+    if (!userSearch) return 'user not found';
+
+    const allNoteTaking = await NoteTaking.find(
       {
         assignedTo: req.userId,
       },
       '-__v'
-    ).populate('assignedTo');
+    );
+
+    if (!allNoteTaking) return 'note-taking not found';
 
     const userInfo = {
-      user: allNoteTaking[0].assignedTo.user,
-      email: allNoteTaking[0].assignedTo.email,
+      user: userSearch.user,
+      email: userSearch.email,
     };
-
-    allNoteTaking = allNoteTaking.map((value) => {
-      return {
-        _id: value._id,
-        title: value.title,
-        tag: value.tag,
-        favorite: value.favorite,
-        text: value.text,
-        lastUpdate: value.lastUpdate,
-      };
-    });
 
     return {
       allNoteTaking: allNoteTaking,

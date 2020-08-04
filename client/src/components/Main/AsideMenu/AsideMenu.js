@@ -16,6 +16,7 @@ export default {
      * @method noteListQuery
      */
     noteListQuery() {
+      if (!this.noteList) return false;
       return this.noteList
         .filter(value => {
           const valueSearch = value.title.toLowerCase();
@@ -56,7 +57,7 @@ export default {
             title: 'Nova anotação',
             tag: 'Lembrete',
             favorite: false,
-            text: 'Texto de exemplo'
+            text: '<p>Texto de exemplo</p>'
           },
           {
             headers: { Authorization: `Bearer ${localStorage.getItem('US_XXX')}` }
@@ -79,7 +80,8 @@ export default {
     },
 
     /** Deletar anotação.
-     * @summary "Emite o inicio do evento de deletar que será executado no componente do editor de texto".
+     * @summary "Emite o inicio do evento de deletar que será executado no componente do editor
+     * de texto juntamente com a informação de que a lista esta vazia ou não".
      * @method noteTakingDelete
      */
     noteTakingDelete() {
@@ -96,12 +98,13 @@ export default {
       let newNoteList = [];
 
       if (eventName === 'delete') {
-        if (this.noteListQuery[this.noteSelected]._id === data._id) this.emitNoteTaking(0);
-
-        newNoteList = this.noteList.filter(value => {
+        this.noteSelected = false;
+        this.noteList = this.noteList.filter(value => {
           if (data._id === value._id) return false;
           return true;
         });
+
+        return;
       }
 
       if (eventName === 'save') {

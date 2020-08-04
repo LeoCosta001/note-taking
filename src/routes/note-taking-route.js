@@ -17,6 +17,9 @@ router.get('/', async (req, res) => {
   try {
     const list = await noteTakingController.noteList(req, res);
 
+    if (list === 'user not found')
+      return res.status(400).send({ error: 'Usuário não encontrado.' });
+
     return res.send({
       noteTakingList: list.allNoteTaking,
       userInfo: list.userInfo,

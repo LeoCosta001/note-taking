@@ -13,14 +13,16 @@ export default {
         title: '',
         tag: '',
         favorite: false,
-        text: ''
+        text: '',
+        lastUpdate: '--/--/---- --:--:--'
       },
       appEdit: {
         id: '',
         title: '',
         tag: '',
         favorite: false,
-        text: ''
+        text: '',
+        lastUpdate: '--/--/---- --:--:--'
       },
 
       // Status da anotação
@@ -67,16 +69,35 @@ export default {
      * @param {*Object} data "Objeto com os novos dados do editor de texto".
      */
     attNoteEditor(data) {
-      this.noteStatus.edit = false;
-      this.noteSelected = data;
-      this.appEdit = {
-        id: data._id,
-        title: data.title,
-        tag: data.tag,
-        favorite: data.favorite,
-        text: data.text,
-        lastUpdate: data.lastUpdate
-      };
+      if (!data) {
+        const noData = {
+          id: '',
+          title: '',
+          tag: '',
+          favorite: false,
+          text: '',
+          lastUpdate: '--/--/---- --:--:--'
+        };
+
+        this.noteStatus.name = 'noNoteSelect';
+
+        this.noteSelected = noData;
+        this.appEdit = noData;
+      } else {
+        this.noteStatus = {
+          name: 'save',
+          edit: false
+        };
+        this.noteSelected = data;
+        this.appEdit = {
+          id: data._id,
+          title: data.title,
+          tag: data.tag,
+          favorite: data.favorite,
+          text: data.text,
+          lastUpdate: data.lastUpdate
+        };
+      }
     },
 
     /** Salvar anotação.
@@ -126,6 +147,8 @@ export default {
           headers: { Authorization: `Bearer ${localStorage.getItem('US_XXX')}` }
         })
         .then(res => {
+          this.attNoteEditor(false);
+
           this.$emit('returnNoteTakingDelete', res.data.noteTakingDeleted);
         })
         .catch(err => {

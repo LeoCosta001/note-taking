@@ -33,7 +33,7 @@ export default {
 
     /** Deletar anotação.
      * @summary "Inicia um evento de deletar que será executado no componente do editor de texto".
-     * @method reqNoteTakingDelete
+     * @method noteTakingDelete
      */
     noteTakingDelete() {
       this.$refs.component_NoteEditor.deleteNote();

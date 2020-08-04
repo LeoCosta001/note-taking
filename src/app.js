@@ -4,60 +4,62 @@ const cors = require('cors');
 const history = require('connect-history-api-fallback');
 const mongoose = require('mongoose');
 // const path = require('path');
-const bodyParser = require("body-parser");
-const morgan = require("morgan");
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 // Configurações
 require('dotenv').config();
 
-    // Body Parser
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: true }));
+// Body Parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-    // Morgan
-    app.use(morgan('tiny'));
+// Morgan
+app.use(morgan('tiny'));
 
-    // Cors
-    app.use(cors());
-    
-    // Redirecionamento de rota para arquivo estático
-    // (OBS: Este middleware tem que ser executado antes dos arquivos estáticos)
-    ///// app.use(history());
+// Cors
+app.use(cors());
 
-    // Arquivos estáticos
-    ///// app.use(express.static(path.join(__dirname + "/client/dist")));
+// Redirecionamento de rota para arquivo estático
+// (OBS: Este middleware tem que ser executado antes dos arquivos estáticos)
+///// app.use(history());
 
-    // Database
-    mongoose.connect(process.env.DATABASE_CONNECTION_STRING, {
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-      useNewUrlParser: true,
-      useCreateIndex: true,
-    });
+// Arquivos estáticos
+///// app.use(express.static(path.join(__dirname + "/client/dist")));
 
-    const db = mongoose.connection;
+// Database
+mongoose.connect(
+  process.env.DATABASE_CONNECTION_STRING || 'mongodb://localhost/mongo',
+  {
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useNewUrlParser: true,
+    useCreateIndex: true,
+  }
+);
 
-    db.on('connected', () => {
-      console.log('Mongoose default connection is open');
-    });
+const db = mongoose.connection;
 
-    db.on('error', (err) => {
-      console.log(`Mongoose default connection has occured \n${err}`);
-    });
+db.on('connected', () => {
+  console.log('Mongoose default connection is open');
+});
 
-    db.on('disconnected', () => {
-      console.log('Mongoose default connection is disconnected');
-    });
+db.on('error', (err) => {
+  console.log(`Mongoose default connection has occured \n${err}`);
+});
 
-    process.on('SIGINT', () => {
-      db.close(() => {
-        console.log(
-          'Mongoose default connection is disconnected due to application termination'
-        );
-        process.exit(0);
-      });
-    });
+db.on('disconnected', () => {
+  console.log('Mongoose default connection is disconnected');
+});
 
+process.on('SIGINT', () => {
+  db.close(() => {
+    console.log(
+      'Mongoose default connection is disconnected due to application termination'
+    );
+    process.exit(0);
+  });
+});
 
 // Importar Rotas
 const AuthRoutes = require('./routes/auth-route');
