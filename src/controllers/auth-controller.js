@@ -28,7 +28,7 @@ exports.userAdd = async (req, res) => {
       title: 'Nova anotação',
       tag: 'Lembrete',
       favorite: false,
-      text: 'Texto de exemplo',
+      text: '<p>Texto de exemplo</p>',
       assignedTo: user._id,
       lastUpdate: currentDate(),
     });
