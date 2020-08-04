@@ -68,7 +68,7 @@
       >
         <div class="notelist__item__title">{{ data.title }}</div>
         <div class="notelist__item__content">{{ data.text }}</div>
-        <div class="notelist__item__category">
+        <div class="notelist__item__category" :class="tagColorClass(data.tag)">
           <div></div>
           {{ data.tag }}
         </div>

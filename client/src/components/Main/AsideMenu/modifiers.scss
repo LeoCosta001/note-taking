@@ -6,3 +6,38 @@
     background-color: rgba(52, 152, 219, 0.2) !important;
   }
 }
+
+/********************************
+* Cores diferente para cada Tag *
+*********************************/
+.tag--color--Lembrete {
+  color: $flatLightPurple !important;
+
+  & div {
+    background-color: $flatLightPurple !important;
+  }
+}
+
+.tag--color--Importante {
+  color: $flatLightRed !important;
+
+  & div {
+    background-color: $flatLightRed !important;
+  }
+}
+
+.tag--color--Trabalho {
+  color: $flatCarrot !important;
+
+  & div {
+    background-color: $flatCarrot !important;
+  }
+}
+
+.tag--color--Outros {
+  color: $flatLightGreen !important;
+
+  & div {
+    background-color: $flatLightGreen !important;
+  }
+}

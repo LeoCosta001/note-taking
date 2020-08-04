@@ -10,7 +10,7 @@ export default {
     };
   },
   computed: {
-    // Filtra a lista de anotações deacordo com o texto digitado no input de pesquisa.
+    // Filtra a lista de anotações de acordo com o texto digitado no input de pesquisa.
     noteListQuery() {
       return this.noteList.filter(value => {
         const valueSearch = value.title.toLowerCase();
@@ -31,7 +31,7 @@ export default {
       this.$emit('noteTakingSelected', this.noteListQuery[index]);
     },
 
-    /** Cria anotação.
+    /** Cria uma nova anotação.
      * @method noteTakingSave
      */
     noteTakingCreate() {
@@ -72,7 +72,12 @@ export default {
       this.$emit('noteTakingDelete');
     },
 
-    // Atualizar lista de notas
+    /** Atualizar lista de anotações.
+     * @summary "Método utilizado por outros componentes para atualizar a lista de anotações"
+     * @method attNoteList
+     * @param {*Object} data "Objeto com os dados que serão utilizados nos eventos".
+     * @param {String} eventName "String que corresponde ao nome do evento".
+     */
     attNoteList(data, eventName) {
       let newNoteList = [];
 
@@ -94,6 +99,19 @@ export default {
 
       if (!eventName) newNoteList = data;
       this.noteList = newNoteList;
+    },
+
+    /** Alterar cor da tag de acordo com o nome da tag.
+     * @method tagColorClass
+     * @param {*Number} tagName "String que corresponde ao nome da Tag".
+     */
+    tagColorClass(tagName) {
+      return {
+        'tag--color--Lembrete': tagName === 'Lembrete',
+        'tag--color--Importante': tagName === 'Importante',
+        'tag--color--Trabalho': tagName === 'Trabalho',
+        'tag--color--Outros': tagName === 'Outros'
+      };
     }
   }
 };
