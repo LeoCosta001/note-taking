@@ -10,6 +10,7 @@ module.exports = {
   rules: {
     'comma-dangle': ['error', 'never'],
     'arrow-parens': ['error', 'as-needed'],
+    'operator-linebreak': [2, 'after'],
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
     'max-len': ['error', { ignoreUrls: true, ignoreStrings: true, code: 1000 }],
     'no-tabs': ['error', { allowIndentationTabs: true }],

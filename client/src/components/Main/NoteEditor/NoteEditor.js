@@ -8,14 +8,27 @@ export default {
   },
   data() {
     return {
-      noteSelected: [],
+      noteSelected: {
+        id: '',
+        title: '',
+        tag: '',
+        favorite: false,
+        text: ''
+      },
       appEdit: {
         id: '',
-        noteTitle: '',
-        noteTag: '',
-        noteFavorite: false,
-        noteText: ''
+        title: '',
+        tag: '',
+        favorite: false,
+        text: ''
       },
+
+      // Status da anotação
+      noteStatus: {
+        name: 'save',
+        edit: false
+      },
+
       // Toolbar do editor de texto
       vueEditorConfig: {
         customToolbar: [
@@ -30,19 +43,39 @@ export default {
     };
   },
   methods: {
+    /** Checar se houve alteração na anotação selecionada.
+     * @summary "Se houver diferença entre a anotação selecionada para a original então
+     * o Status da anotação se tornará 'Não salvo'.
+     * @method checkEdit
+     */
+    checkEdit() {
+      if (
+        this.noteSelected.title !== this.appEdit.title ||
+        this.noteSelected.tag !== this.appEdit.tag ||
+        this.noteSelected.favorite !== this.appEdit.favorite ||
+        this.noteSelected.text !== this.appEdit.text
+      ) {
+        this.noteStatus.edit = true;
+      } else {
+        this.noteStatus.edit = false;
+      }
+    },
+
     /** Método para atualizar os dados do editor de texto.
      * @summary "Os dados são alterados no momento que o usuário seleciona uma nova anotação".
      * @method attNoteEditor
      * @param {*Object} data "Objeto com os novos dados do editor de texto".
      */
     attNoteEditor(data) {
+      this.noteStatus.edit = false;
       this.noteSelected = data;
       this.appEdit = {
         id: data._id,
         title: data.title,
         tag: data.tag,
         favorite: data.favorite,
-        text: data.text
+        text: data.text,
+        lastUpdate: data.lastUpdate
       };
     },
 
@@ -54,6 +87,7 @@ export default {
      * @returns {Fail} "Exibe um mensagem de Erro".
      */
     saveNote() {
+      this.noteStatus.name = 'saving';
       http
         .put(
           `note-taking/${this.appEdit.id}`,
@@ -68,9 +102,13 @@ export default {
           }
         )
         .then(res => {
+          this.noteStatus.edit = false;
+          this.noteStatus.name = 'save';
+          this.attNoteEditor(res.data.noteTakingUpdate);
           this.$emit('returnNoteTakingSave', res.data.noteTakingUpdate);
         })
         .catch(err => {
+          this.noteStatus.name = 'error';
           alert(err.response.data.error);
         });
     },

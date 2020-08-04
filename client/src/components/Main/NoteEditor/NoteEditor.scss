@@ -5,8 +5,102 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
+// Visualizador de status da anotação
+.noteeditor__status__container {
+  width: calc(100% - 100px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 12.5px;
+
+  /*********************
+  * Status da anotação *
+  **********************/
+  & .noteeditor__current__status__container {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+
+    & span {
+      display: flex;
+      align-items: center;
+      font-size: 0.8em;
+      font-weight: 500;
+    }
+
+    & .svg-status-icon {
+      width: 20px;
+      height: 20px;
+      margin: 0px 5px;
+    }
+
+    // Status: Salvo
+    & .noteeditor__current__status__save {
+      color: $BG_Green;
+      & .svg-status-icon {
+        & path {
+          fill: $BG_Green;
+        }
+      }
+    }
+
+    // Status: Salvando...
+    & .noteeditor__current__status__saving {
+      color: $BG_Blue;
+      & .svg-status-icon {
+        animation: rotate 1s linear infinite;
+        @keyframes rotate {
+          0% {
+            transform: rotate(360deg);
+          }
+        }
+        & path {
+          fill: $BG_Blue;
+        }
+      }
+    }
+
+    // Status: Alterações não salvas
+    & .noteeditor__current__status__edit {
+      color: $BG_Orange;
+      & .svg-status-icon {
+        & path {
+          fill: $BG_Orange;
+        }
+      }
+    }
+
+    // Status: Erro
+    & .noteeditor__current__status__error {
+      color: $BG_Red;
+      & .svg-status-icon {
+        & path {
+          fill: $BG_Red;
+        }
+      }
+    }
+  }
+
+  & .noteeditor__last__update {
+    & .noteeditor__last__update__title {
+      font-size: 0.8em;
+      font-style: italic;
+    }
+
+    & .noteeditor__last__update__content {
+      font-size: 0.9em;
+      font-weight: bold;
+    }
+  }
+}
+
+/**********************
+* Editor de anotações *
+***********************/
 .noteeditor__container {
   background-color: $BG_White;
   width: calc(100% - 80px);
@@ -66,7 +160,7 @@
 
   & .noteeditor__app__container {
     height: calc(100vh - 277px);
-    
+
     & .noteeditor__app {
       height: 100%;
       display: flex;

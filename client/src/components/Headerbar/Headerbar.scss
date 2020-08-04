@@ -81,7 +81,8 @@
     position: absolute;
     bottom: -80px;
     right: 0px;
-
+    z-index: 900;
+    
     & hr {
       margin: 10px 0px;
     }
