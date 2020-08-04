@@ -29,7 +29,7 @@ app.use(cors());
 
 // Database
 mongoose.connect(
-  process.env.DATABASE_CONNECTION_STRING || 'mongodb://localhost/mongo',
+  process.env.DATABASE_CONNECTION_STRING || 'mongodb://localhost/mongodb',
   {
     useUnifiedTopology: true,
     useFindAndModify: false,
