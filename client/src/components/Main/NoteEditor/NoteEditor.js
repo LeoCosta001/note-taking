@@ -108,6 +108,8 @@ export default {
      * @returns {Fail} "Exibe um mensagem de Erro".
      */
     saveNote() {
+      if (!appEdit.id) return alert('Selecione uma anotação antes de salvar.');
+
       this.noteStatus.name = 'saving';
       http
         .put(
@@ -142,6 +144,8 @@ export default {
      * @returns {Fail} "Exibe um mensagem de Erro".
      */
     deleteNote() {
+      if (!appEdit.id) return alert('Selecione uma anotação antes de deletar.');
+
       http
         .delete(`note-taking/${this.appEdit.id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('US_XXX')}` }
