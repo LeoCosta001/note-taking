@@ -106,6 +106,11 @@ router.put('/:noteTakingId', async (req, res) => {
   if (typeof text !== 'string' || !text.length > 0)
     return res.status(400).send({ error: 'Texto inválido.' });
 
+  if (!req.params.noteTakingId)
+    return res
+      .status(400)
+      .send({ error: 'Não foi encontrado o ID da anotação.' });
+
   try {
     const noteTakingUpdate = await noteTakingController.noteUpdate(req, res);
 
@@ -114,6 +119,7 @@ router.put('/:noteTakingId', async (req, res) => {
 
     return res.send({ noteTakingUpdate });
   } catch (err) {
+    console.log(err);
     res.status(400).send({ error: 'Falha ao atualizar a anotação.' });
   }
 });

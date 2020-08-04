@@ -10,13 +10,27 @@ export default {
     };
   },
   computed: {
-    // Filtra a lista de anotações de acordo com o texto digitado no input de pesquisa.
+    /** Filtra a lista de anotações de acordo com o texto digitado no input de pesquisa.
+     * @summary "Alem de filtrar as anotações este método tambem cria a key 'simpleText para
+     * retirar as tag HTML do demonstrador de texto"!.
+     * @method noteListQuery
+     */
     noteListQuery() {
-      return this.noteList.filter(value => {
-        const valueSearch = value.title.toLowerCase();
-        const querySearch = this.searchQuery.toLowerCase();
-        return valueSearch.includes(querySearch);
-      });
+      return this.noteList
+        .filter(value => {
+          const valueSearch = value.title.toLowerCase();
+          const querySearch = this.searchQuery.toLowerCase();
+          return valueSearch.includes(querySearch);
+        })
+        .map(value => ({
+          _id: value._id,
+          title: value.title,
+          tag: value.tag,
+          favorite: value.favorite,
+          text: value.text,
+          lastUpdate: value.lastUpdate,
+          simpleText: value.text.replace(/(<([^>]+)>)/gi, '')
+        }));
     }
   },
   methods: {

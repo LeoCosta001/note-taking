@@ -67,10 +67,13 @@
         v-on:click="emitNoteTaking(index)"
       >
         <div class="notelist__item__title">{{ data.title }}</div>
-        <div class="notelist__item__content">{{ data.text }}</div>
-        <div class="notelist__item__category" :class="tagColorClass(data.tag)">
-          <div></div>
-          {{ data.tag }}
+        <div class="notelist__item__content">{{ data.simpleText }}</div>
+        <div class="notelist__item__footer">
+          <div class="notelist__item__category" :class="tagColorClass(data.tag)">
+            <div></div>
+            {{ data.tag }}
+          </div>
+          <div class="notelist__item__date">{{ data.lastUpdate.split(' ')[0] }}</div>
         </div>
       </div>
     </section>
