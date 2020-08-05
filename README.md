@@ -3,21 +3,21 @@
 ## Indice
 
 1.  **Informações**
-    1.1 Sobre este projeto
-    1.2 Funcionalidades
-    1.3 Tecnologias
-    1.4 Site
+    1. Sobre este projeto
+    2. Funcionalidades
+    3. Tecnologias
+    4. Site
 2.  **Como rodar o Servidor**
-    2.1 Requisitos
-    2.2 Download das dependências
-    2.3 Como iniciar o Servidor (Back-end)
-    2.4 Como iniciar o Servidor (Front-end)
-    2.3 Como fazer o build dos arquivos do Front-end
-    2.4 Como iniciar o Servidor no modo "Produção"
+    1. Requisitos
+    2. Download das dependências
+    3. Como iniciar o Servidor (Back-end)
+    4. Como iniciar o Servidor (Front-end)
+    3. Como fazer o build dos arquivos do Front-end
+    4. Como iniciar o Servidor no modo "Produção"
 3.  **Como rodar os Testes**
-    3.1 Teste de Rotas
+    1. Teste de Rotas
 4.  **Informações adicionais**
-    4.1 Navegadores testados
+    1. Navegadores testados
 
 ## Informações
 
@@ -155,11 +155,9 @@ OBS: Para esta etapa é necessário já ter feito 2 coisas:
 
 - Utilizar no teste uma conta randômica _(Padrão: `createRandomAccount: true`)_.
 
-* Utilizar no teste uma conta pré-definida \*(Padrão: `account: {
-
+* Utilizar no teste uma conta pré-definida *(Padrão: `account: {
 user: "test", email: "teste@teste.com", password: "12345"
-
-})`\*.
+})`*.
 
 - Observações:
 
