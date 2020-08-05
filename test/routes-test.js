@@ -2,34 +2,15 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const should = chai.should();
 const _forTest = require('./methodsForTest');
+const reqTest = require('./routes-test.config');
 
 chai.use(chaiHttp);
 
 /** Teste de requisições.
- * @summary "Inicia um teste com uma requisição para a rota de Login e com o token de autenticação
+ * @summary "Inicia um teste com uma requisição para a rota de Login ou de de Nova Conta e com o token de autenticação
  * recebido é iniciado os testes de CRUD com as anotações da aplicação".
- * @requires reqTest "Este é um Objeto com as informações necessarias para a realização dos testes".
- * @param {*Number} port "Porta para se realizar os testes".
- * @param {*String} path "Rota para se realizar os testes".
- * @param {Boolean} testCreatingNewAccount "O valor 'true' indica que é para testar a criação de uma conta nova".
- * @param {Boolean} createRandomAccount "O valor 'true' indica que é para criar uma nova conta randomica para o teste.
- * OBS: Só utilize esta opção juntamente com o 'testCreatingNewAccount: true'.
- * OBS: Se este valor estiver como 'true' então será ignorado a key 'reqTest.account'".
- * @param {Object} account "Informações de login para se realizar os testes.
- * OBS: Se a key 'reqTest.createRandomAccount' estiver com o valor 'true' então esta key será ignorada".
+ * @requires ./routes-test.config.js "Neste arquivo estará as configurações para realizar os testes".
  */
-
-const reqTest = {
-  port: 3000,
-  path: 'http://localhost',
-  testCreatingNewAccount: true,
-  createRandomAccount: true,
-  account: {
-    user: 'test',
-    email: 'teste@teste.com',
-    password: '12345',
-  },
-};
 
 let reqValues = {
   token: '',
@@ -62,11 +43,21 @@ describe(`Teste de Requisições (${reqTest.path}:${reqTest.port})`, () => {
             res.should.have.status(200);
             res.body.should.be.an('object');
             res.body.should.to.have.all.keys('userInfo', 'token');
-            res.body.userInfo.should.to.have.all.keys('_id', 'user', 'email', 'createAt', '__v');
+            res.body.userInfo.should.to.have.all.keys(
+              '_id',
+              'user',
+              'email',
+              'createAt',
+              '__v'
+            );
             res.body.userInfo._id.should.be.a('string').with.lengthOf.above(3);
             res.body.userInfo.user.should.be.a('string').with.lengthOf.above(2);
-            res.body.userInfo.email.should.be.a('string').with.lengthOf.above(4);
-            res.body.userInfo.createAt.should.be.a('string').with.lengthOf.above(5);
+            res.body.userInfo.email.should.be
+              .a('string')
+              .with.lengthOf.above(4);
+            res.body.userInfo.createAt.should.be
+              .a('string')
+              .with.lengthOf.above(5);
             res.body.token.should.be.a('string').with.lengthOf.above(37);
 
             reqValues.token = res.body.token;
