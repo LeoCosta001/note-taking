@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middleware/auth');
-const checkValues = require('../middleware/checkValues');
+const checkNoteTakingRoute = require('../middleware/checkNoteTakingRoute');
+const { validationResult } = require('express-validator');
 
 const noteTakingController = require('../controllers/note-taking-controller');
 
@@ -36,27 +37,11 @@ router.get('/', async (req, res) => {
  * @returns {Sucess} "Lista com a anotação que foi criada".
  * @returns {Fail} "Mensagem de erro".
  */
-router.post('/', async (req, res) => {
-  const { title, tag, favorite, text } = req.body;
-
-  if (
-    !checkValues.string(title, {
-      required: true,
-      minLength: 1,
-      maxLength: 255,
-      useTrim: true,
-    })
-  )
-    return res.status(400).send({ error: 'Título inválido.' });
-
-  if (!checkValues.enum(tag, checkValues.tag))
-    return res.status(400).send({ error: 'Tag inválida.' });
-
-  if (typeof favorite !== 'boolean')
-    return res.status(400).send({ error: 'Favorito inválido.' });
-
-  if (typeof text !== 'string' || !text.length > 0)
-    return res.status(400).send({ error: 'Texto inválido.' });
+router.post('/', checkNoteTakingRoute.checkNoteValues(), async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ error: errors.array()[0].msg });
+  }
 
   try {
     const noteTakingCreate = await noteTakingController.noteAdd(req, res);
@@ -77,45 +62,29 @@ router.post('/', async (req, res) => {
  * @returns {Sucess} "Anotação que foi atualizada".
  * @returns {Fail} "Mensagem de erro".
  */
-router.put('/:noteTakingId', async (req, res) => {
-  const { title, tag, favorite, text } = req.body;
+router.put(
+  '/:noteTakingId',
+  checkNoteTakingRoute.checkNoteValues(),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ error: errors.array()[0].msg });
+    }
 
-  if (
-    !checkValues.string(title, {
-      required: true,
-      minLength: 1,
-      maxLength: 255,
-      useTrim: true,
-    })
-  )
-    return res.status(400).send({ error: 'Título inválido.' });
+    try {
+      const noteTakingUpdate = await noteTakingController.noteUpdate(req, res);
 
-  if (!checkValues.enum(tag, checkValues.tag))
-    return res.status(400).send({ error: 'Tag inválida.' });
+      if (noteTakingUpdate === 'not found')
+        return res
+          .status(404)
+          .send({ error: 'Nenhuma anotação não encontrada.' });
 
-  if (typeof favorite !== 'boolean')
-    return res.status(400).send({ error: 'Favorito inválido.' });
-
-  if (typeof text !== 'string' || !text.length > 0)
-    return res.status(400).send({ error: 'Texto inválido.' });
-
-  if (!req.params.noteTakingId)
-    return res
-      .status(400)
-      .send({ error: 'Não foi encontrado o ID da anotação.' });
-
-  try {
-    const noteTakingUpdate = await noteTakingController.noteUpdate(req, res);
-
-    if (noteTakingUpdate === 'not found')
-      return res.status(404).send({ error: 'Nenhuma anotação não encontrada.' });
-
-    return res.send({ noteTakingUpdate });
-  } catch (err) {
-    console.log(err);
-    res.status(500).send({ error: 'Falha ao atualizar a anotação.' });
+      return res.send({ noteTakingUpdate });
+    } catch (err) {
+      res.status(500).send({ error: 'Falha ao atualizar a anotação.' });
+    }
   }
-});
+);
 
 /** Deletar uma anotação.
  * @summary "Antes de deletar a anotação é iniciado o método de controle 'noteDelete()'.

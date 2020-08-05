@@ -20,8 +20,7 @@ module.exports = {
    */
   email(emailString, localConfig = { required: false, maxLength: false }) {
     if (typeof emailString != 'string') return false;
-    if (!localConfig.required && emailString.length === 0)
-      emailString = 'abc@abc.abc';
+    if (!localConfig.required && emailString.length === 0) return true;
     emailString = emailString.trim();
 
     if (localConfig.maxLength && emailString.length > localConfig.maxLength)
@@ -77,8 +76,8 @@ module.exports = {
     if (localConfig.required && stringValue.length < 1) return false;
     if (localConfig.maxLength && stringValue.length > localConfig.maxLength)
       return false;
-    if (stringValue.length < localConfig.minLength) return false;
-    return true;
+
+    return stringValue.length < localConfig.minLength;
   },
 
   /** Método que verifica se o valor inserido esta entre os valores pré-definidos.
@@ -88,8 +87,13 @@ module.exports = {
    * @return {Boolean} "'true' caso o valor comparado seja encontrado na array".
    */
   enum(reqValue, arrayValue) {
-    if (!Array.isArray(arrayValue) || reqValue == undefined) return false;
-    if (!arrayValue.length > 0 || !reqValue.length > 0) return false;
+    if (
+      !Array.isArray(arrayValue) ||
+      reqValue == undefined ||
+      !arrayValue.length > 0 ||
+      !reqValue.length > 0
+    )
+      return false;
 
     let _check = false;
 
@@ -97,8 +101,7 @@ module.exports = {
       if (reqValue === value) _check = true;
     });
 
-    if (_check) return true;
-    return false;
+    return _check;
   },
 
   /** Array com as unicas tags possiveis de se armazenar no banco de dados.
