@@ -34,7 +34,7 @@
 - **Front-end:** VueJs.
 - **Back-end:** NodeJs + Express.
 - **API Rest:** Express + Axios.
-- **Outras API/Lib:** Babel + vue2-editor + Bcryptjs + jsonwebtoken.
+- **Outras API/Lib:** Babel + vue2-editor + express-validator + Bcryptjs + jsonwebtoken.
 - **Banco de Dados:** MongoDB + Mongoose.
 - **Testes:** Mocha + Chai.
 - **Pré-processador:** SCSS.
