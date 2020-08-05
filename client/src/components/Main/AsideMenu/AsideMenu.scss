@@ -152,6 +152,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
 
     & .notelist__item__title {
       font-weight: bold;
@@ -192,8 +193,37 @@
       }
     }
 
+    & .notelist__item__favorite {
+      opacity: 0;
+      background-color: transparent;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      padding: 0.5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 5px;
+      right: 10px;
+
+      & .svg-favorite-icon {
+        height: 100%;
+        width: 100%;
+        margin: 0px 0px 1px 1px;
+
+        & path {
+          fill: $BG_Yellow;
+        }
+      }
+    }
+
     &:hover {
       background-color: rgba(52, 152, 219, 0.1);
+
+      & .notelist__item__favorite {
+        opacity: 1;
+      }
     }
   }
 }

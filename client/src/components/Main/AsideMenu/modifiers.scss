@@ -7,6 +7,20 @@
   }
 }
 
+// Marcação de favorito
+.favorite--active {
+  & .notelist__item__favorite {
+    opacity: 1 !important;
+    background-color: $BG_Yellow !important;
+
+    & .svg-favorite-icon {
+      & path {
+        fill: $BG_White !important;
+      }
+    }
+  }
+}
+
 /********************************
 * Cores diferente para cada Tag *
 *********************************/

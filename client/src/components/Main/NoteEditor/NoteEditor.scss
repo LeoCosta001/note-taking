@@ -54,7 +54,7 @@
       & .svg-status-icon {
         animation: rotate 1s linear infinite;
         @keyframes rotate {
-          0% {
+          100% {
             transform: rotate(360deg);
           }
         }
