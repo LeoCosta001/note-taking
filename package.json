@@ -10,7 +10,7 @@
     "client-build": "cd client && npm run build",
     "client-dev": "cd client && npm run serve",
     "server-dev": "node node_modules/nodemon/bin/nodemon bin/server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --timeout 100000"
   },
   "repository": {
     "type": "git",
@@ -35,8 +35,12 @@
     "mongoose": "^5.9.27"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "concurrently": "^5.2.0",
+    "mocha": "^8.1.1",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "should": "^13.2.3"
   }
 }
