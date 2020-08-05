@@ -41,7 +41,7 @@
           v-model="passwordConfirm"
         />
       </div>
-      <button type="submit" class="newacc__button">Entrar</button>
+      <button type="submit" class="newacc__button">Criar conta</button>
       <div class="newacc__hr__container">
         <hr />
         <span>ou</span>
