@@ -148,6 +148,15 @@ export default {
         'tag--color--Outros': tagName === 'Outros'
       };
     },
+    /** Ativar/Desativar a anotação como favorita.
+     * @method favoriteToggle
+     * @param {*Number} index "Number que corresponde ao index da anotação selecionada".
+     */
+    favoriteToggle(index) {
+      const noteSelect = this.noteList[index].favorite;
+      if (noteSelect) this.noteList[index].favorite = false;
+      else this.noteList[index].favorite = true;
+    },
 
     /** Abrir um Popup.
      * @summary "Inicia a função que exibe um popup".
