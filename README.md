@@ -64,9 +64,9 @@
 
 **Como iniciar o Servidor no modo "Produção"**
 - Para iniciar o servidor no **modo "produção"** digite o comando: `npm start`.
-OBS: Para esta etapa é necessário já ter feito 2 coisas:
+  OBS: Para esta etapa é necessário já ter feito 2 coisas:
   - Ter feito o build do Front-end com o comando: `npm run client-build`.
-  - Criado um arquivo na pasta raiz com o nome `.env` e colocar neste arquivo este código: `RUN_MODE=production`.
+  - Criado um arquivo na pasta raiz com o nome `.env` e colocar neste arquivo este código: `RUN_MODE=production` (isso é para que o Back-end execute os arquivos de Build).
  
  ## Como rodar os Testes
 **Teste de rotas:**
@@ -89,7 +89,7 @@ OBS: Para esta etapa é necessário já ter feito 2 coisas:
       - Endereço do servidor *(Padrão: `path: 'http://localhost'`)*.
       - Incluir no teste a criação de uma nova conta *(Padrão: `testCreatingNewAccount: true`)*.
       - Utilizar no teste uma conta randômica *(Padrão: `createRandomAccount: true`)*.
-      - Utilizar no teste uma conta pré-definida*(Padrão: `account: {
+      - Utilizar no teste uma conta pré-definida *(Padrão: `account: {
       user:  "test", email: "teste@teste.com", password:  "12345"
       })`*.
     - Observações:
