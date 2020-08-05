@@ -5,11 +5,13 @@
       @noteTakingSelected="reqNoteTakingSelected"
       @noteTakingSave="noteTakingSave"
       @noteTakingDelete="noteTakingDelete"
+      @sendOpenPopup="openPopup"
     />
     <NoteEditor
       ref="component_NoteEditor"
       @returnNoteTakingSave="reqNoteTakingSave"
       @returnNoteTakingDelete="reqNoteTakingDelete"
+      @sendOpenPopup="openPopup"
     />
   </div>
 </template>

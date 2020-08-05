@@ -42,6 +42,15 @@ export default {
     // Retorno da anotação deletada para atualziar a lista de anotações.
     reqNoteTakingDelete(data) {
       this.$refs.component_AsideMenu.attNoteList(data, 'delete');
+    },
+
+    /** Abrir um Popup.
+     * @summary "Inicia a função que exibe um popup".
+     * @method openPopup
+     * @param {*Object} popupContent "Objeto contendo as informações que serão exibidas".
+     */
+    openPopup(popupContent) {
+      this.$emit('sendOpenPopup', popupContent);
     }
   },
 
@@ -59,7 +68,26 @@ export default {
         this.$emit('userInfo', res.data.userInfo);
       })
       .catch(err => {
-        alert(err.response.data.error);
+        this.noteStatus.name = 'error';
+        if (err.name === 'Error' && err.message === 'Network Error') {
+          this.openPopup({
+            title: 'Erro!',
+            subTitle: 'Falha de conexão.',
+            message: 'Não foi possivel listar as suas anotações, tente novamente.'
+          });
+        } else if (err.response.data.error) {
+          this.openPopup({
+            title: 'Erro!',
+            subTitle: 'Não foi possivel listar as suas anotação.',
+            message: err.response.data.error
+          });
+        } else {
+          this.openPopup({
+            title: 'Erro!',
+            subTitle: 'Erro no sistema.',
+            message: 'Ops! Encontramos um pequeno problema.'
+          });
+        }
       });
   }
 };

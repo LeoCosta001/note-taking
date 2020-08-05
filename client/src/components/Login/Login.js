@@ -24,8 +24,35 @@ export default {
           this.$router.push({ path: '/app' });
         })
         .catch(err => {
-          alert(err.response.data.error);
+          if (err.name === 'Error' && err.message === 'Network Error') {
+            this.openPopup({
+              title: 'Erro!',
+              subTitle: 'Falha de conexão.',
+              message: 'Não foi possivel acessar o servidor.'
+            });
+          } else if (err.response.data.error) {
+            this.openPopup({
+              title: 'Erro!',
+              subTitle: 'Não foi possivel acessar a conta.',
+              message: err.response.data.error
+            });
+          } else {
+            this.openPopup({
+              title: 'Erro!',
+              subTitle: 'Erro no sistema.',
+              message: 'Ops! Encontramos um pequeno problema.'
+            });
+          }
         });
+    },
+
+    /** Abrir um Popup.
+     * @summary "Inicia a função que exibe um popup".
+     * @method openPopup
+     * @param {*Object} popupContent "Objeto contendo as informações que serão exibidas".
+     */
+    openPopup(popupContent) {
+      this.$emit('sendOpenPopup', popupContent);
     }
   }
 };

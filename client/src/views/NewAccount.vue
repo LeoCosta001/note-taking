@@ -1,6 +1,6 @@
 <template>
   <div class="NewAccountView">
-    <NewAccount />
+    <NewAccount @sendOpenPopup="openPopup" />
   </div>
 </template>
 
@@ -11,6 +11,16 @@ export default {
   name: 'NewAccountView',
   components: {
     NewAccount
+  },
+  methods: {
+    /** Abrir um Popup.
+     * @summary "Inicia a função que exibe um popup".
+     * @method openPopup
+     * @param {*Object} popupContent "Objeto contendo as informações que serão exibidas".
+     */
+    openPopup(popupContent) {
+      this.$emit('sendOpenPopup', popupContent);
+    }
   }
 };
 </script>

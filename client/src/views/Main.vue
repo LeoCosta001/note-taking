@@ -1,6 +1,6 @@
 <template>
   <div class="MainView">
-    <Main @userInfo="userInfo" />
+    <Main @userInfo="userInfo" @sendOpenPopup="openPopup" />
   </div>
 </template>
 
@@ -20,6 +20,15 @@ export default {
      */
     userInfo(data) {
       this.$emit('userInfo', data);
+    },
+
+    /** Abrir um Popup.
+     * @summary "Inicia a função que exibe um popup".
+     * @method openPopup
+     * @param {*Object} popupContent "Objeto contendo as informações que serão exibidas".
+     */
+    openPopup(popupContent) {
+      this.$emit('sendOpenPopup', popupContent);
     }
   }
 };

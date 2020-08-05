@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <Headerbar ref="component_Headerbar" />
-    <router-view @userInfo="userInfo" />
+    <router-view @sendOpenPopup="openPopup" @userInfo="userInfo" />
+    <Popup ref="component_Popup" />
   </div>
 </template>
 
 <script>
 import Headerbar from '@/components/Headerbar/Headerbar.vue';
+import Popup from '@/components/Popup/Popup.vue';
 
 export default {
   components: {
-    Headerbar
+    Headerbar,
+    Popup
   },
   methods: {
     /** Atualizar as informações do usuário exibidas no Headerbar.
@@ -20,6 +23,15 @@ export default {
      */
     userInfo(data) {
       this.$refs.component_Headerbar.attUserInfo(data);
+    },
+
+    /** Abrir um Popup.
+     * @summary "Inicia a função que exibe um popup".
+     * @method openPopup
+     * @param {*Object} popupContent "Objeto contendo as informações que serão exibidas".
+     */
+    openPopup(popupContent) {
+      this.$refs.component_Popup.openPopup(popupContent);
     }
   }
 };

@@ -108,7 +108,13 @@ export default {
      * @returns {Fail} "Exibe um mensagem de Erro".
      */
     saveNote() {
-      if (!this.appEdit.id) return alert('Selecione uma anotação antes de salvar.');
+      if (!this.appEdit.id) {
+        return this.openPopup({
+          title: 'Erro!',
+          subTitle: 'Nenhuma anotação selecionada.',
+          message: 'Selecione uma anotação antes de salvar.'
+        });
+      }
 
       this.noteStatus.name = 'saving';
       http
@@ -132,7 +138,26 @@ export default {
         })
         .catch(err => {
           this.noteStatus.name = 'error';
-          alert(err.response.data.error);
+          if (err.name === 'Error' && err.message === 'Network Error') {
+            this.openPopup({
+              title: 'Erro!',
+              subTitle: 'Falha de conexão.',
+              message:
+                'Não foi possivel salvar a anotação selecionada porque não foi possivel acessar o servidor.'
+            });
+          } else if (err.response.data.error) {
+            this.openPopup({
+              title: 'Erro!',
+              subTitle: 'Não foi possivel salvar a anotação.',
+              message: err.response.data.error
+            });
+          } else {
+            this.openPopup({
+              title: 'Erro!',
+              subTitle: 'Erro no sistema.',
+              message: 'Ops! Encontramos um pequeno problema.'
+            });
+          }
         });
 
       return undefined;
@@ -146,7 +171,13 @@ export default {
      * @returns {Fail} "Exibe um mensagem de Erro".
      */
     deleteNote() {
-      if (!this.appEdit.id) return alert('Selecione uma anotação antes de deletar.');
+      if (!this.appEdit.id) {
+        return this.openPopup({
+          title: 'Erro!',
+          subTitle: 'Nenhuma anotação selecionada.',
+          message: 'Selecione uma anotação antes de deletar.'
+        });
+      }
 
       http
         .delete(`note-taking/${this.appEdit.id}`, {
@@ -158,10 +189,38 @@ export default {
           this.$emit('returnNoteTakingDelete', res.data.noteTakingDeleted);
         })
         .catch(err => {
-          alert(err.response.data.error);
+          if (err.name === 'Error' && err.message === 'Network Error') {
+            this.openPopup({
+              title: 'Erro!',
+              subTitle: 'Falha de conexão.',
+              message:
+                'Não foi possivel deletar a anotação selecionada porque não foi possivel acessar o servidor.'
+            });
+          } else if (err.response.data.error) {
+            this.openPopup({
+              title: 'Erro!',
+              subTitle: 'Não foi possivel deletar a anotação.',
+              message: err.response.data.error
+            });
+          } else {
+            this.openPopup({
+              title: 'Erro!',
+              subTitle: 'Erro no sistema.',
+              message: 'Ops! Encontramos um pequeno problema.'
+            });
+          }
         });
 
       return undefined;
+    },
+
+    /** Abrir um Popup.
+     * @summary "Inicia a função que exibe um popup".
+     * @method openPopup
+     * @param {*Object} popupContent "Objeto contendo as informações que serão exibidas".
+     */
+    openPopup(popupContent) {
+      this.$emit('sendOpenPopup', popupContent);
     }
   }
 };
