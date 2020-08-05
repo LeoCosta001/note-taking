@@ -7,6 +7,7 @@
     "start": "node bin/server",
     "run-dev": "concurrently --kill-others \"node node_modules/nodemon/bin/nodemon bin/server\" \"cd client && npm start\"",
     "client-install": "cd client && npm install",
+    "client-fix": "cd client && npm run lint --fix",
     "client-build": "cd client && npm run build",
     "client-dev": "cd client && npm run serve",
     "server-dev": "node node_modules/nodemon/bin/nodemon bin/server",
