@@ -18,14 +18,14 @@ router.get('/', async (req, res) => {
     const list = await noteTakingController.noteList(req, res);
 
     if (list === 'user not found')
-      return res.status(400).send({ error: 'Usuário não encontrado.' });
+      return res.status(404).send({ error: 'Usuário não encontrado.' });
 
     return res.send({
       noteTakingList: list.allNoteTaking,
       userInfo: list.userInfo,
     });
   } catch (err) {
-    return res.status(400).send({ error: 'Falha ao listar anotações.' });
+    return res.status(500).send({ error: 'Falha ao listar anotações.' });
   }
 });
 
@@ -62,11 +62,11 @@ router.post('/', async (req, res) => {
     const noteTakingCreate = await noteTakingController.noteAdd(req, res);
 
     if (noteTakingCreate === 'user not found')
-      return res.status(400).send({ error: 'Usuário não encontrado.' });
+      return res.status(404).send({ error: 'Usuário não encontrado.' });
 
     return res.send({ noteTakingCreate });
   } catch (err) {
-    return res.status(400).send({ error: 'Falha ao adicionar nova anotação.' });
+    return res.status(500).send({ error: 'Falha ao adicionar nova anotação.' });
   }
 });
 
@@ -108,12 +108,12 @@ router.put('/:noteTakingId', async (req, res) => {
     const noteTakingUpdate = await noteTakingController.noteUpdate(req, res);
 
     if (noteTakingUpdate === 'not found')
-      return res.status(400).send({ error: 'Anotação não encontrada.' });
+      return res.status(404).send({ error: 'Nenhuma anotação não encontrada.' });
 
     return res.send({ noteTakingUpdate });
   } catch (err) {
     console.log(err);
-    res.status(400).send({ error: 'Falha ao atualizar a anotação.' });
+    res.status(500).send({ error: 'Falha ao atualizar a anotação.' });
   }
 });
 
@@ -132,7 +132,7 @@ router.delete('/:noteTakingId', async (req, res) => {
 
     return res.send({ noteTakingDeleted });
   } catch (err) {
-    res.status(400).send({ error: 'Falha ao deletar a anotação.' });
+    res.status(500).send({ error: 'Falha ao deletar a anotação.' });
   }
 });
 

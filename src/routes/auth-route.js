@@ -46,11 +46,11 @@ router.post('/register', async (req, res) => {
     const userInfo = await authController.userAdd(req, res);
 
     if (userInfo === 'email in use')
-      return res.status(400).send({ error: 'Este email já está cadastrado.' });
+      return res.status(409).send({ error: 'Este email já está cadastrado.' });
 
     res.send({ userInfo, token: generateToken({ id: userInfo.id }) });
   } catch (err) {
-    res.status(400).send({ error: 'Falha ao resgistrar.' });
+    res.status(500).send({ error: 'Falha ao resgistrar.' });
   }
 });
 
@@ -66,14 +66,14 @@ router.post('/authenticate', async (req, res) => {
     const userAuth = await authController.userAuth(req, res);
 
     if (userAuth === 'not found')
-      return res.status(400).send({ error: 'Usuário não encontrado.' });
+      return res.status(404).send({ error: 'Usuário não encontrado.' });
 
     if (userAuth === 'invalid password')
       return res.status(400).send({ error: 'Senha inválida.' });
 
     res.send({ userAuth, token: generateToken({ id: userAuth.id }) });
   } catch (err) {
-    res.status(400).send({ error: 'Falha ao autenticar login.' });
+    res.status(500).send({ error: 'Falha ao autenticar login.' });
   }
 });
 

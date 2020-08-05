@@ -35,7 +35,7 @@ exports.userAdd = async (req, res) => {
 
     return user;
   } catch (err) {
-    res.status(400).send({ error: 'Falha ao resgistrar.' });
+    res.status(500).send({ error: 'Falha ao resgistrar.' });
   }
 };
 
@@ -61,7 +61,7 @@ exports.userAuth = async (req, res) => {
 
     return user;
   } catch (err) {
-    res.status(400).send({ error: 'Falha ao resgistrar.' });
+    res.status(500).send({ error: 'Falha ao resgistrar.' });
   }
 };
 
