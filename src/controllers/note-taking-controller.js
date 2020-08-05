@@ -32,7 +32,7 @@ exports.noteList = async (req, res) => {
       userInfo: userInfo,
     };
   } catch (err) {
-    res.status(400).send({ error: 'Falha ao listar anotações.' });
+    res.status(500).send({ error: 'Falha ao listar anotações.' });
   }
 };
 
@@ -62,7 +62,7 @@ exports.noteAdd = async (req, res) => {
 
     return noteTakingCreate;
   } catch (err) {
-    res.status(400).send({ error: 'Falha ao adicionar nova anotação.' });
+    res.status(500).send({ error: 'Falha ao adicionar nova anotação.' });
   }
 };
 
@@ -101,7 +101,7 @@ exports.noteUpdate = async (req, res) => {
 
     return noteTakingUpdate;
   } catch (err) {
-    res.status(400).send({ error: 'Falha ao atualizar a anotação.' });
+    res.status(500).send({ error: 'Falha ao atualizar a anotação.' });
   }
 };
 
@@ -128,7 +128,7 @@ exports.noteDelete = async (req, res) => {
     );
     return noteTakingDeleted;
   } catch (err) {
-    res.status(400).send({ error: 'Falha ao deletar a anotação.' });
+    res.status(500).send({ error: 'Falha ao deletar a anotação.' });
   }
 };
 

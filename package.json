@@ -7,6 +7,7 @@
     "start": "node bin/server",
     "run-dev": "concurrently --kill-others \"node node_modules/nodemon/bin/nodemon bin/server\" \"cd client && npm start\"",
     "client-install": "cd client && npm install",
+    "client-fix": "cd client && npm run lint --fix",
     "client-build": "cd client && npm run build",
     "client-dev": "cd client && npm run serve",
     "server-dev": "node node_modules/nodemon/bin/nodemon bin/server",
@@ -30,7 +31,7 @@
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-validator": "^6.6.0",
+    "express-validator": "^6.6.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.27",
     "morgan": "^1.10.0"
